@@ -1,5 +1,7 @@
 # Distance
 
+[![Build Status](https://travis-ci.org/pkinney/distance.svg?branch=master)](https://travis-ci.org/pkinney/distance)
+
 Provides a set of distance functions for use in GIS or graphic applications.
 
 ## Installation

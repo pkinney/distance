@@ -10,6 +10,14 @@ defmodule DistanceTest do
     assert_in_delta Distance.distance({2, -1}, {-1, 3}), 5, 0.001
   end
 
+  test "calculate distance between multiple points" do
+    assert_in_delta Distance.distance([{2.5, 2.5}, {4, 0.8}, {2.5, 3.1}, {2.5, 3.1}]), 5.013, 0.001
+    assert_in_delta Distance.distance([{2.5, 2.5}, {4, 0.8}]), 2.267, 0.001
+
+    assert Distance.distance([{2.5, 3.1}]) == 0
+    assert Distance.distance([]) == 0
+  end
+
   test "calculate distance between two 3-dimentional points" do
     assert_in_delta Distance.distance({2, -1, 4}, {-1, 3, 2}), 5.385, 0.001
   end

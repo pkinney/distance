@@ -30,4 +30,11 @@ defmodule Distance do
        true -> distance_squared({x, y}, {x1, y1})
     end
   end
+
+  def distance([]), do: 0
+  def distance([_]), do: 0
+  def distance([p1, p2]), do: distance(p1, p2)
+  def distance([p1, p2 | tail]) do
+    distance(p1, p2) + distance([ p2 | tail])
+  end
 end

@@ -3,7 +3,7 @@ defmodule Distance.Mixfile do
 
   def project do
     [app: :distance,
-     version: "0.1.2",
+     version: "0.2.0",
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -22,7 +22,7 @@ defmodule Distance.Mixfile do
 
   defp description do
     """
-    Various distance calculations
+    Various distance functions for geometric or geographic calculations
     """
   end
 

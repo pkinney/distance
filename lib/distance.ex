@@ -9,6 +9,14 @@ defmodule Distance do
     dx * dx + dy * dy
   end
 
+  def distance_squared({x1, y1, z1}, {x2, y2, z2}) do
+    dx = x1 - x2
+    dy = y1 - y2
+    dz = z1 - z2
+
+    dx * dx + dy * dy + dz * dz
+  end
+
   def segment_distance_squared({x, y}, {x1, y1}, {x2, y2}) when x1 == x2 and y1 == y2, do: distance_squared({x, y}, {x1, y1})
   def segment_distance_squared({x, y}, {x1, y1}, {x2, y2}) do
     dx = x2 - x1

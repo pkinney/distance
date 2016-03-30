@@ -1,6 +1,6 @@
 defmodule GreatCircleDistanceTest do
   use ExUnit.Case
-  doctest Distance
+  doctest Distance.GreatCircle
 
   test "calculate great circle distance between two points" do
     assert Distance.GreatCircle.distance({-74.00597, 40.71427}, {-74.00597, 40.71427}) == 0

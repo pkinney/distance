@@ -8,7 +8,7 @@ Provides a set of distance functions for use in GIS or graphic applications.
 
 ```elixir
 defp deps do
-  [{:distance, "~> 0.2.0"}]
+  [{:distance, "~> 0.2.1"}]
 end
 ```
 

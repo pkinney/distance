@@ -1,0 +1,306 @@
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.11.4">
+    <title>Distance – distance v0.2.1</title>
+    <link rel="stylesheet" href="dist/app-1e374caa3d.css" />
+    <script src="dist/sidebar_items.js"></script>
+  </head>
+  <body data-type="modules">
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <i class="icon-menu"></i>
+</button>
+<section class="sidebar">
+  <button class="sidebar-toggle">
+    <i class="icon-menu"></i>
+  </button>
+
+  
+  <a href="api-reference.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        distance
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v0.2.1
+      </h2>
+    </div>
+    
+  </a>
+
+  <div class="sidebar-search">
+    <i class="icon-search"></i>
+    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+
+  <ul id="full-list" class="sidebar-fullList"></ul>
+  <div class="sidebar-noResults"></div>
+</section>
+
+<section class="content">
+  <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">distance v0.2.1</small>
+        Distance
+        
+        
+      </h1>
+
+      
+        <section id="moduledoc" class="docstring">
+          <p>Basic distance calculations for cartesian coordinates for calculting
+distances on a single plane.  If you are looking to calculating distance
+on the surface of Earth, check out the <a href="Distance.GreatCircle.html"><code class="inline">Distance.GreatCircle</code></a> module.</p>
+<h2>Examples</h2>
+<pre><code class="iex elixir">iex&gt; Distance.distance({2.5, 2.5}, {4, 0.8})
+2.2671568097509267
+iex&gt; Distance.segment_distance({2.5, 2.5}, {4, 0.8}, {-2, 3})
+1.0797077632696
+iex&gt; Distance.distance([{2.5, 2.5}, {4, 0.8}, {-2, 3}, {1, -1}])
+13.657774933219109</code></pre>
+
+        </section>
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <i class="icon-link"></i>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#distance/1">distance(list)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the geometric distance of the linestring defined by the List of
+points.  Accepts 2- or 3-dimensional points</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#distance/2">distance(p1, p2)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the geometric distance between two points.  Accepts 2- or
+3-dimensional points</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#distance_squared/2">distance_squared(arg1, arg2)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the square of the distance between two points.  This is used by the
+<code class="inline">Distance.distance</code> function above, but having access to the value before
+the expensice sqaure root operation is useful for time-sensitive applications
+that only need values for comparison</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#segment_distance/3">segment_distance(p, p1, p2)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Returns the geometric distance from a point <code class="inline">p</code> and the line segment
+between two points <code class="inline">p1</code> and <code class="inline">p2</code>.  Note that this is a line segment, not
+an infinite line, so points not between <code class="inline">p1</code> and <code class="inline">p2</code> will return the
+distance to the nearest of the two endpoints</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#segment_distance_squared/3">segment_distance_squared(arg1, arg2, arg3)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Similar to <code class="inline">Distance.distance_squared</code>, this provides much faster comparable
+version of <code class="inline">Distance.segment_distance</code></p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <i class="icon-link"></i>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="distance/1">
+  <div class="detail-header">
+    <a href="#distance/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">distance(list)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns the geometric distance of the linestring defined by the List of
+points.  Accepts 2- or 3-dimensional points.</p>
+<h2>Examples</h2>
+<pre><code class="iex elixir">iex&gt; Distance.distance([{2.5, 2.5}, {4, 0.8}, {2.5, 3.1}, {2.5, 3.1}])
+5.013062853300123
+iex&gt; Distance.distance([{1, -2, 1}, {-2, 2, -1}, {-2, 1, 0}, {2, -3, 1}])
+12.543941016045627</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="distance/2">
+  <div class="detail-header">
+    <a href="#distance/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">distance(p1, p2)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns the geometric distance between two points.  Accepts 2- or
+3-dimensional points.</p>
+<h2>Examples</h2>
+<pre><code class="iex elixir">iex&gt; Distance.distance({1, -2}, {-2, 2})
+5.0
+iex&gt; Distance.distance({1, -2, 2}, {-2, 2, 1})
+5.0990195135927845</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="distance_squared/2">
+  <div class="detail-header">
+    <a href="#distance_squared/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">distance_squared(arg1, arg2)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns the square of the distance between two points.  This is used by the
+<code class="inline">Distance.distance</code> function above, but having access to the value before
+the expensice sqaure root operation is useful for time-sensitive applications
+that only need values for comparison.</p>
+<h2>Examples</h2>
+<pre><code class="iex elixir">iex&gt; Distance.distance_squared({1, -2}, {-2, 2})
+25
+iex&gt; Distance.distance_squared({1, -2, 2}, {-2, 2, 1})
+26</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="segment_distance/3">
+  <div class="detail-header">
+    <a href="#segment_distance/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">segment_distance(p, p1, p2)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Returns the geometric distance from a point <code class="inline">p</code> and the line segment
+between two points <code class="inline">p1</code> and <code class="inline">p2</code>.  Note that this is a line segment, not
+an infinite line, so points not between <code class="inline">p1</code> and <code class="inline">p2</code> will return the
+distance to the nearest of the two endpoints.</p>
+<h2>Examples</h2>
+<pre><code class="iex elixir">iex&gt; Distance.segment_distance({3, 2}, {-2, 1}, {5, 3})
+0.4120816918460673 # distance between the point {3, 2} and the closest point along line segment ({-2, 1}, {5, 3})
+iex&gt; Distance.segment_distance({1, -2}, {-2, 2}, {-10, 102})
+5.0
+iex&gt; Distance.segment_distance({1, -2}, {-2, 2}, {1, -2})
+0.0</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="segment_distance_squared/3">
+  <div class="detail-header">
+    <a href="#segment_distance_squared/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">segment_distance_squared(arg1, arg2, arg3)</span>
+      
+  </div>
+  
+  <section class="docstring">
+    <p>Similar to <code class="inline">Distance.distance_squared</code>, this provides much faster comparable
+version of <code class="inline">Distance.segment_distance</code>.</p>
+<h2>Examples</h2>
+<pre><code class="iex elixir">iex&gt; Distance.segment_distance_squared({3, 2}, {-2, 1}, {5, 3})
+0.16981132075471717
+iex&gt; Distance.segment_distance_squared({1, -2}, {-2, 2}, {-10, 102})
+25</code></pre>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+
+      
+        <footer class="footer">
+      <p>
+        <span class="line">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.11.4),
+        </span>
+        <span class="line">
+          designed by
+          <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+      </p>
+      <button class="night-mode-toggle" />
+    </footer>
+  </div>
+</section>
+</div>
+  <script src="dist/app-6d2e071366.js"></script>
+  </body>
+</html>
+

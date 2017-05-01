@@ -7,9 +7,9 @@ defmodule Distance.Mixfile do
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     description: description,
-     package: package,
-     deps: deps]
+     description: description(),
+     package: package(),
+     deps: deps()]
   end
 
   def application do
@@ -18,10 +18,10 @@ defmodule Distance.Mixfile do
 
   defp deps do
     [
-      {:earmark, "~> 0.1", only: :dev},
-      {:ex_doc, "~> 0.11", only: :dev},
-      {:benchfella, "~> 0.3.0", only: :dev},
-      {:excoveralls, "~> 0.4", only: :test}
+      {:earmark, "~> 1.1", only: :dev},
+      {:ex_doc, "~> 0.15", only: :dev},
+      {:benchfella, "~> 0.3.4", only: :dev},
+      {:excoveralls, "~> 0.6", only: :test}
     ]
   end
 

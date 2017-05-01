@@ -4,21 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.11.4">
+    <meta name="generator" content="ExDoc v0.15.0">
     <title>Distance.GreatCircle – distance v0.2.1</title>
-    <link rel="stylesheet" href="dist/app-1e374caa3d.css" />
-    <script src="dist/sidebar_items.js"></script>
+    <link rel="stylesheet" href="dist/app-f7824c48e6.css" />
+    
+    <script src="dist/sidebar_items-547bd9e2a3.js"></script>
   </head>
   <body data-type="modules">
+    <script>if(localStorage.getItem('night-mode')) document.body.className += ' night-mode';</script>
 
     <div class="main">
 <button class="sidebar-toggle">
   <i class="icon-menu"></i>
 </button>
 <section class="sidebar">
-  <button class="sidebar-toggle">
-    <i class="icon-menu"></i>
-  </button>
 
   
   <a href="api-reference.html" class="sidebar-projectLink">
@@ -49,13 +48,13 @@
 
     
   </ul>
-
+  <div class="gradient"></div>
   <ul id="full-list" class="sidebar-fullList"></ul>
-  <div class="sidebar-noResults"></div>
 </section>
 
 <section class="content">
-  <div id="content" class="content-inner">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
 
 
       <h1>
@@ -66,7 +65,7 @@
       </h1>
 
       
-        <section id="moduledoc" class="docstring">
+        <section id="moduledoc">
           <p>Calculate great circle distances (shortest travel distance on the surface of
 a spherical Earth) given a two longitude-latitude pairs.  This is an implementation
 of the <a href="https://en.wikipedia.org/wiki/Haversine_formula">Haversine formula</a>
@@ -119,8 +118,6 @@ List of <code class="inline">{longitude, latitude}</code> pairs</p>
 
           
 
-          
-
         </section>
       
 
@@ -135,18 +132,24 @@ List of <code class="inline">{longitude, latitude}</code> pairs</p>
             Functions
           </h1>
           <div class="detail" id="distance/1">
+  
   <div class="detail-header">
     <a href="#distance/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
     <span class="signature">distance(list)</span>
-      
+    
+    
+    
   </div>
-  
   <section class="docstring">
     <p>Returns the great circle distance in meters along a linestring defined by the
 List of <code class="inline">{longitude, latitude}</code> pairs.</p>
-<h2>Examples</h2>
+<h2 id="distance/1-examples" class="section-heading">
+  <a href="#distance/1-examples" class="hover-link"><i class="icon-link"></i></a>
+  Examples
+</h2>
+
 <pre><code class="iex elixir">iex&gt; Distance.GreatCircle.distance([
 ...&gt;  {-96.796667, 32.775833},
 ...&gt;  {126.967583, 37.566776},
@@ -159,18 +162,24 @@ List of <code class="inline">{longitude, latitude}</code> pairs.</p>
   </section>
 </div>
 <div class="detail" id="distance/2">
+  
   <div class="detail-header">
     <a href="#distance/2" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
     <span class="signature">distance(arg1, arg2)</span>
-      
+    
+    
+    
   </div>
-  
   <section class="docstring">
     <p>Returns the great circle distance in meters between two points in the form of
 <code class="inline">{longitude, latitude}</code>.</p>
-<h2>Examples</h2>
+<h2 id="distance/2-examples" class="section-heading">
+  <a href="#distance/2-examples" class="hover-link"><i class="icon-link"></i></a>
+  Examples
+</h2>
+
 <pre><code class="iex elixir">iex&gt; Distance.GreatCircle.distance({-105.343, 39.984}, {-105.534, 39.123})
 97129.22118968463
 iex&gt; Distance.GreatCircle.distance({-74.00597, 40.71427}, {-70.56656, -33.42628})
@@ -183,25 +192,24 @@ iex&gt; Distance.GreatCircle.distance({-74.00597, 40.71427}, {-70.56656, -33.426
       
 
       
-
-      
-        <footer class="footer">
-      <p>
-        <span class="line">
-          Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.11.4),
-        </span>
-        <span class="line">
-          designed by
-          <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.15.0),
           </span>
-      </p>
-      <button class="night-mode-toggle" />
-    </footer>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle" />
+      </footer>
+    </div>
   </div>
 </section>
 </div>
-  <script src="dist/app-6d2e071366.js"></script>
+  <script src="dist/app-372682077e.js"></script>
   </body>
 </html>
 

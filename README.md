@@ -1,6 +1,7 @@
 # Distance
 
 [![Build Status](https://travis-ci.org/pkinney/distance.svg?branch=master)](https://travis-ci.org/pkinney/distance)
+[![Hex.pm](https://img.shields.io/hexpm/v/distance.svg)](https://hex.pm/packages/distance)
 
 Provides a set of distance functions for use in GIS or graphic applications.
 

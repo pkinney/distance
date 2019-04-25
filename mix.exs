@@ -18,6 +18,7 @@ defmodule Distance.Mixfile do
 
   defp deps do
     [
+      {:seg_seg, "~> 0.1"},
       {:earmark, "~> 1.1", only: :dev},
       {:ex_doc, "~> 0.15", only: :dev},
       {:benchfella, "~> 0.3.4", only: :dev},

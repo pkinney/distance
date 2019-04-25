@@ -47,7 +47,8 @@ defmodule Distance.GreatCircle do
   """
   def distance([]), do: 0
   def distance([_]), do: 0
+
   def distance([p1, p2 | tail]) do
-    distance(p1, p2) + distance([ p2 | tail])
+    distance(p1, p2) + distance([p2 | tail])
   end
 end

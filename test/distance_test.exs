@@ -80,6 +80,7 @@ defmodule DistanceTest do
     assert_in_delta Distance.segment_segment_distance({0, 0}, {1, 1}, {1, 0}, {2, 0}),
                     0.707,
                     0.001
+
     assert_in_delta Distance.segment_segment_distance({0, 0}, {-1, -1}, {3, 4}, {12, 1}),
                     5,
                     0.001

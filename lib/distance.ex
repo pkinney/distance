@@ -78,7 +78,9 @@ defmodule Distance do
       iex> Distance.segment_distance_squared({1, -2}, {-2, 2}, {-10, 102})
       25
   """
-  def segment_distance_squared({x, y}, {x1, y1}, {x2, y2}) when x1 == x2 and y1 == y2, do: distance_squared({x, y}, {x1, y1})
+  def segment_distance_squared({x, y}, {x1, y1}, {x2, y2}) when x1 == x2 and y1 == y2,
+    do: distance_squared({x, y}, {x1, y1})
+
   def segment_distance_squared({x, y}, {x1, y1}, {x2, y2}) do
     dx = x2 - x1
     dy = y2 - y1
@@ -86,9 +88,9 @@ defmodule Distance do
     t = ((x - x1) * dx + (y - y1) * dy) / (dx * dx + dy * dy)
 
     cond do
-       (t > 1) -> distance_squared({x, y}, {x2, y2})
-       (t > 0) -> distance_squared({x, y}, {x1 + dx * t, y1 + dy * t})
-       true -> distance_squared({x, y}, {x1, y1})
+      t > 1 -> distance_squared({x, y}, {x2, y2})
+      t > 0 -> distance_squared({x, y}, {x1 + dx * t, y1 + dy * t})
+      true -> distance_squared({x, y}, {x1, y1})
     end
   end
 
@@ -105,7 +107,7 @@ defmodule Distance do
   """
   def segment_segment_distance(a1, a2, b1, b2),
     do: :math.sqrt(segment_segment_distance_squared(a1, a2, b1, b2))
-  
+
   @doc """
   Similar to `Distance.distance_squared`, this provides much faster comparable
   version of `Distance.segment_segment_distance`.
@@ -139,7 +141,8 @@ defmodule Distance do
   def distance([]), do: 0
   def distance([_]), do: 0
   def distance([p1, p2]), do: distance(p1, p2)
+
   def distance([p1, p2 | tail]) do
-    distance(p1, p2) + distance([ p2 | tail])
+    distance(p1, p2) + distance([p2 | tail])
   end
 end

@@ -13,6 +13,8 @@ defmodule Distance do
       13.657774933219109
   """
 
+  @type point :: {number, number}
+
   @doc """
   Returns the geometric distance between two points.  Accepts 2- or
   3-dimensional points.
@@ -23,23 +25,8 @@ defmodule Distance do
       iex> Distance.distance({1, -2, 2}, {-2, 2, 1})
       5.0990195135927845
   """
+  @spec distance(point, point) :: number
   def distance(p1, p2), do: :math.sqrt(distance_squared(p1, p2))
-
-  @doc """
-  Returns the geometric distance from a point `p` and the line segment
-  between two points `p1` and `p2`.  Note that this is a line segment, not
-  an infinite line, so points not between `p1` and `p2` will return the
-  distance to the nearest of the two endpoints.
-
-  ## Examples
-      iex> Distance.segment_distance({3, 2}, {-2, 1}, {5, 3})
-      0.4120816918460673 # distance between the point {3, 2} and the closest point along line segment ({-2, 1}, {5, 3})
-      iex> Distance.segment_distance({1, -2}, {-2, 2}, {-10, 102})
-      5.0
-      iex> Distance.segment_distance({1, -2}, {-2, 2}, {1, -2})
-      0.0
-  """
-  def segment_distance(p, p1, p2), do: :math.sqrt(segment_distance_squared(p, p1, p2))
 
   @doc """
   Returns the square of the distance between two points.  This is used by the
@@ -53,6 +40,7 @@ defmodule Distance do
       iex> Distance.distance_squared({1, -2, 2}, {-2, 2, 1})
       26
   """
+  @spec distance_squared(point, point) :: number
   def distance_squared({x1, y1}, {x2, y2}) do
     dx = x1 - x2
     dy = y1 - y2
@@ -69,6 +57,23 @@ defmodule Distance do
   end
 
   @doc """
+  Returns the geometric distance from a point `p` and the line segment
+  between two points `p1` and `p2`.  Note that this is a line segment, not
+  an infinite line, so points not between `p1` and `p2` will return the
+  distance to the nearest of the two endpoints.
+
+  ## Examples
+      iex> Distance.segment_distance({3, 2}, {-2, 1}, {5, 3})
+      0.4120816918460673 # distance between the point {3, 2} and the closest point along line segment ({-2, 1}, {5, 3})
+      iex> Distance.segment_distance({1, -2}, {-2, 2}, {-10, 102})
+      5.0
+      iex> Distance.segment_distance({1, -2}, {-2, 2}, {1, -2})
+      0.0
+  """
+  @spec segment_distance(point, point, point) :: number
+  def segment_distance(p, p1, p2), do: :math.sqrt(segment_distance_squared(p, p1, p2))
+
+  @doc """
   Similar to `Distance.distance_squared`, this provides much faster comparable
   version of `Distance.segment_distance`.
 
@@ -78,6 +83,7 @@ defmodule Distance do
       iex> Distance.segment_distance_squared({1, -2}, {-2, 2}, {-10, 102})
       25
   """
+  @spec segment_distance_squared(point, point, point) :: number
   def segment_distance_squared({x, y}, {x1, y1}, {x2, y2}) when x1 == x2 and y1 == y2,
     do: distance_squared({x, y}, {x1, y1})
 
@@ -105,6 +111,7 @@ defmodule Distance do
       iex> Distance.segment_segment_distance({0, 0}, {1, 1}, {1, 1}, {2, 2})
       0.0
   """
+  @spec segment_segment_distance(point, point, point, point) :: number
   def segment_segment_distance(a1, a2, b1, b2),
     do: :math.sqrt(segment_segment_distance_squared(a1, a2, b1, b2))
 
@@ -112,6 +119,7 @@ defmodule Distance do
   Similar to `Distance.distance_squared`, this provides much faster comparable
   version of `Distance.segment_segment_distance`.
   """
+  @spec segment_segment_distance_squared(point, point, point, point) :: number
   def segment_segment_distance_squared(a1, a2, b1, b2) do
     case SegSeg.intersection(a1, a2, b1, b2) do
       {true, _, _} ->
@@ -138,6 +146,7 @@ defmodule Distance do
       iex> Distance.distance([{1, -2, 1}, {-2, 2, -1}, {-2, 1, 0}, {2, -3, 1}])
       12.543941016045627
   """
+  @spec distance(list(point)) :: number
   def distance([]), do: 0
   def distance([_]), do: 0
   def distance([p1, p2]), do: distance(p1, p2)

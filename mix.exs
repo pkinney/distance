@@ -24,7 +24,8 @@ defmodule Distance.Mixfile do
       {:earmark, "~> 1.1", only: :dev},
       {:ex_doc, "~> 0.15", only: :dev},
       {:benchfella, "~> 0.3.4", only: :dev},
-      {:excoveralls, "~> 0.6", only: :test}
+      {:excoveralls, "~> 0.6", only: :test},
+      {:dialyxir, "~> 0.4", only: [:dev], runtime: false}
     ]
   end
 

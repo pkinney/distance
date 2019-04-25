@@ -93,6 +93,40 @@ defmodule Distance do
   end
 
   @doc """
+  Provides the minimum distance between any two points along the given line
+  segments.  In the case where the segements are not disjoint, this will
+  always return `0.0`.
+
+  ## Example
+      iex> Distance.segment_segment_distance({0, 0}, {1, 1}, {1, 0}, {2, 0})
+      0.7071067811865476
+      iex> Distance.segment_segment_distance({0, 0}, {1, 1}, {1, 1}, {2, 2})
+      0.0
+  """
+  def segment_segment_distance(a1, a2, b1, b2),
+    do: :math.sqrt(segment_segment_distance_squared(a1, a2, b1, b2))
+  
+  @doc """
+  Similar to `Distance.distance_squared`, this provides much faster comparable
+  version of `Distance.segment_segment_distance`.
+  """
+  def segment_segment_distance_squared(a1, a2, b1, b2) do
+    case SegSeg.intersection(a1, a2, b1, b2) do
+      {true, _, _} ->
+        0.0
+
+      {false, _, _} ->
+        [
+          segment_distance_squared(a1, b1, b2),
+          segment_distance_squared(a2, b1, b2),
+          segment_distance_squared(b1, a1, a2),
+          segment_distance_squared(b2, a1, a2)
+        ]
+        |> Enum.min()
+    end
+  end
+
+  @doc """
   Returns the geometric distance of the linestring defined by the List of
   points.  Accepts 2- or 3-dimensional points.
 

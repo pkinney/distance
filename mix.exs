@@ -10,7 +10,7 @@ defmodule Distance.Mixfile do
       start_permanent: Mix.env() == :prod,
       description: description(),
       package: package(),
-      dialyzer: [plt_add_apps: [:mix, :seg_seg]],
+      dialyzer: [plt_add_apps: [:mix, :topo, :seg_seg]],
       deps: deps()
     ]
   end
@@ -21,7 +21,7 @@ defmodule Distance.Mixfile do
 
   defp deps do
     [
-      {:seg_seg, "~> 0.1"},
+      {:topo, "~> 0.3"},
       {:earmark, "~> 1.1", only: :dev},
       {:ex_doc, "~> 0.15", only: :dev},
       {:benchfella, "~> 0.3.4", only: :dev},

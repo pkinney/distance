@@ -105,7 +105,11 @@ defmodule Distance do
   """
   def segment_segment_distance(a1, a2, b1, b2),
     do: :math.sqrt(segment_segment_distance_squared(a1, a2, b1, b2))
-
+  
+  @doc """
+  Similar to `Distance.distance_squared`, this provides much faster comparable
+  version of `Distance.segment_segment_distance`.
+  """
   def segment_segment_distance_squared(a1, a2, b1, b2) do
     case SegSeg.intersection(a1, a2, b1, b2) do
       {true, _, _} ->

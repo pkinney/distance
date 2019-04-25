@@ -10,6 +10,7 @@ defmodule Distance.Mixfile do
       start_permanent: Mix.env() == :prod,
       description: description(),
       package: package(),
+      dialyzer: [plt_add_apps: [:mix, :seg_seg]],
       deps: deps()
     ]
   end

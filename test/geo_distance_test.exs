@@ -172,6 +172,7 @@ defmodule GeoDistanceTest do
     assert Distance.Geo.distance(a, b) == 0.0
     assert Distance.Geo.distance(b, a) == 0.0
   end
+
   # test "distance between a Polygon and a MultiPolygon"
   # test "distance between a Polygon and a MultiPolygon that intersect"
 

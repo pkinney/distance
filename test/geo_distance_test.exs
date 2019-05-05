@@ -113,9 +113,14 @@ defmodule GeoDistanceTest do
     a =
       "POLYGON((-5 3,1 -12,12 -2,8 -5,12 4,9 7,9 3,5 7,-1 6,-5 3),(-3 0,2 5,6 3,7 -2,4 0,1 2,-3 0))"
       |> Geo.WKT.decode!()
+
     b = "LINESTRING(4 8,7 7,8.1 4,8 9,13 10)" |> Geo.WKT.decode!()
-    c = "LINESTRING(-4 5,-2.5 6,-4 5.5,-5 5)" |> Geo.WKT.decode!() # parallel to polygon edge
-    d = "LINESTRING(0 2,1.5 2.5,3 2)" |> Geo.WKT.decode!() # Inside hole of polygon 
+
+    # parallel to polygon edge
+    c = "LINESTRING(-4 5,-2.5 6,-4 5.5,-5 5)" |> Geo.WKT.decode!()
+
+    # Inside hole of polygon 
+    d = "LINESTRING(0 2,1.5 2.5,3 2)" |> Geo.WKT.decode!()
 
     assert_in_delta Distance.Geo.distance(a, b), 0.0707106, 0.001
     assert_in_delta Distance.Geo.distance(b, a), 0.0707106, 0.001
@@ -126,7 +131,18 @@ defmodule GeoDistanceTest do
     assert_in_delta Distance.Geo.distance(a, d), 0.316227, 0.001
     assert_in_delta Distance.Geo.distance(d, a), 0.316227, 0.001
   end
-  # test "distance between a LineString and a Polygon that intersect"
+
+  test "distance between a LineString and a Polygon that intersect" do
+    a =
+      "POLYGON((-5 3,1 -12,12 -2,8 -5,12 4,9 7,9 3,5 7,-1 6,-5 3),(-3 0,2 5,6 3,7 -2,4 0,1 2,-3 0))"
+      |> Geo.WKT.decode!()
+
+    b = "LINESTRING(-6 -9,5 1,0 12)" |> Geo.WKT.decode!()
+
+    assert Distance.Geo.distance(a, b) == 0.0
+    assert Distance.Geo.distance(b, a) == 0.0
+  end
+
   # test "distance between a LineString and a MultiPolygon"
   # test "distance between a LineString and a MultiPolygon that intersect"
 

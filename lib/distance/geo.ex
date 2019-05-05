@@ -57,6 +57,15 @@ defmodule Distance.Geo do
     |> Enum.min()
   end
 
+  defp do_distance(%Geo.Polygon{} = a, %Geo.LineString{} = b), do: do_distance(b, a)
+
+  defp do_distance(%Geo.LineString{coordinates: a}, %Geo.Polygon{coordinates: rings_b}) do
+    Enum.map(rings_b, fn b ->
+      do_linestring_linestring_distance(a, b)
+    end)
+    |> Enum.min()
+  end
+
   defp do_distance(%Geo.Polygon{coordinates: rings_a}, %Geo.Polygon{coordinates: rings_b}) do
     Enum.map(rings_a, fn a ->
       Enum.map(rings_b, fn b ->

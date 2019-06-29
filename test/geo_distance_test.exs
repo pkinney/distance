@@ -148,8 +148,33 @@ defmodule GeoDistanceTest do
 
   # test "distance between a MultiLineString and a MultiLineString"
   # test "distance between a MultiLineString and a MultiLineString that intersect"
-  # test "distance between a MultiLineString and a Polygon"
-  # test "distance between a MultiLineString and a Polygon that intersect"
+
+  test "distance between a MultiLineString and a Polygon" do
+    a =
+      "POLYGON((-5 3,1 -12,12 -2,8 -5,12 4,9 7,9 3,5 7,-1 6,-5 3),(-3 0,2 5,6 3,7 -2,4 0,1 2,-3 0))"
+      |> Geo.WKT.decode!()
+
+    b =
+      "MULTILINESTRING((4 8,7 7,8.1 4,8 9,13 10),(-4 5,-2.5 6,-4 5.5,-5 5),(0 2,1.5 2.5,3 2))"
+      |> Geo.WKT.decode!()
+
+    assert_in_delta Distance.Geo.distance(a, b), 0.0707106, 0.001
+    assert_in_delta Distance.Geo.distance(b, a), 0.0707106, 0.001
+  end
+
+  test "distance between a MultiLineString and a Polygon that intersect" do
+    a =
+      "POLYGON((-4.5 21,-29 -15,17 -17,20 19,-4.5 21),(-8 9,-7 -13,16 -13,14 6,5 17,-8 9))"
+      |> Geo.WKT.decode!()
+
+    b =
+      "MULTILINESTRING((4 8,7 7,8.1 4,8 9,13 10),(-4 5,-2.5 6,-4 5.5,-5 5),(0 2,1.5 2.5,3 2))"
+      |> Geo.WKT.decode!()
+
+    assert Distance.Geo.distance(a, b) == 0.0
+    assert Distance.Geo.distance(b, a) == 0.0
+  end
+
   # test "distance between a MultiLineString and a MultiPolygon"
   # test "distance between a MultiLineString and a MultiPolygon that intersect"
 

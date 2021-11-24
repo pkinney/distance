@@ -13,7 +13,7 @@ defmodule Distance do
       13.657774933219109
   """
 
-  @type point :: {number, number}
+  @type point() :: {number(), number()}
 
   @doc """
   Returns the geometric distance between two points.  Accepts 2- or
@@ -25,7 +25,7 @@ defmodule Distance do
       iex> Distance.distance({1, -2, 2}, {-2, 2, 1})
       5.0990195135927845
   """
-  @spec distance(point, point) :: number
+  @spec distance(point, point) :: float()
   def distance(p1, p2), do: :math.sqrt(distance_squared(p1, p2))
 
   @doc """
@@ -40,7 +40,7 @@ defmodule Distance do
       iex> Distance.distance_squared({1, -2, 2}, {-2, 2, 1})
       26
   """
-  @spec distance_squared(point, point) :: number
+  @spec distance_squared(point, point) :: float()
   def distance_squared({x1, y1}, {x2, y2}) do
     dx = x1 - x2
     dy = y1 - y2
@@ -70,7 +70,7 @@ defmodule Distance do
       iex> Distance.segment_distance({1, -2}, {-2, 2}, {1, -2})
       0.0
   """
-  @spec segment_distance(point, point, point) :: number
+  @spec segment_distance(point, point, point) :: float()
   def segment_distance(p, p1, p2), do: :math.sqrt(segment_distance_squared(p, p1, p2))
 
   @doc """
@@ -83,7 +83,7 @@ defmodule Distance do
       iex> Distance.segment_distance_squared({1, -2}, {-2, 2}, {-10, 102})
       25
   """
-  @spec segment_distance_squared(point, point, point) :: number
+  @spec segment_distance_squared(point, point, point) :: float()
   def segment_distance_squared({x, y}, {x1, y1}, {x2, y2}) when x1 == x2 and y1 == y2,
     do: distance_squared({x, y}, {x1, y1})
 
@@ -111,7 +111,7 @@ defmodule Distance do
       iex> Distance.segment_segment_distance({0, 0}, {1, 1}, {1, 1}, {2, 2})
       0.0
   """
-  @spec segment_segment_distance(point, point, point, point) :: number
+  @spec segment_segment_distance(point, point, point, point) :: float()
   def segment_segment_distance(a1, a2, b1, b2),
     do: :math.sqrt(segment_segment_distance_squared(a1, a2, b1, b2))
 
@@ -119,7 +119,7 @@ defmodule Distance do
   Similar to `Distance.distance_squared`, this provides much faster comparable
   version of `Distance.segment_segment_distance`.
   """
-  @spec segment_segment_distance_squared(point, point, point, point) :: number
+  @spec segment_segment_distance_squared(point, point, point, point) :: float()
   def segment_segment_distance_squared(a1, a2, b1, b2) do
     case SegSeg.intersection(a1, a2, b1, b2) do
       {true, _, _} ->
@@ -146,12 +146,101 @@ defmodule Distance do
       iex> Distance.distance([{1, -2, 1}, {-2, 2, -1}, {-2, 1, 0}, {2, -3, 1}])
       12.543941016045627
   """
-  @spec distance(list(point)) :: number
-  def distance([]), do: 0
-  def distance([_]), do: 0
+  @spec distance(list(point)) :: float()
+  def distance([]), do: 0.0
+  def distance([_]), do: 0.0
   def distance([p1, p2]), do: distance(p1, p2)
 
   def distance([p1, p2 | tail]) do
     distance(p1, p2) + distance([p2 | tail])
+  end
+
+  @doc """
+  Returns a point `distance` units away in the direction `direction`.
+
+  The direction is measured as radians off of the positive x-axis in the direction of
+  the positinve y-axis.  Thus the new coordinates are:
+
+  ```elixir
+  x1 = x0 + distance * cos(direction)
+  y1 = y0 + distance * sin(direction)
+  ```
+
+  ## Examples
+      iex> Distance.project({3, 5}, 3 * :math.pi() / 4, 2)
+      {1.585786437626905, 6.414213562373095} 
+  """
+  @spec project(point(), number(), number()) :: point()
+  def project({x0, y0}, direction, distance) do
+    {
+      x0 + distance * :math.cos(direction),
+      y0 + distance * :math.sin(direction)
+    }
+  end
+
+  @doc """
+  Returns the direction from p0 to p1.  The direction is
+  measured as radians off of the positive x-axis in the direction of the
+  positive y-axis.
+
+  The returned value will always be in the range of (-π, π]. The direction 
+  along the negative x-axis will always return positive π.
+
+  ## Examples
+      iex> Distance.angle_to({2, -1}, {2, 5}) 
+      :math.pi() / 2
+  """
+  @spec angle_to(point(), point()) :: float()
+  def angle_to({x0, y0}, {x1, y1}) do
+    :math.atan2(y1 - y0, x1 - x0)
+  end
+
+  @doc """
+  Returns the cotemrinal angle closest to 0 for the given angle
+
+  No matter the angle provided, the returned angle will be in the range (-π, π]
+
+  ## Examples
+      iex> Distance.min_coterminal_angle(:math.pi() / 2.0)
+      :math.pi() / 2
+      iex> Distance.min_coterminal_angle(-2.0 + :math.pi() * 6)
+      -2.0
+      iex> Distance.min_coterminal_angle(-:math.pi())
+      :math.pi()
+  """
+  @spec min_coterminal_angle(number()) :: float()
+  def min_coterminal_angle(angle) do
+    :math.pi() - min_positive_coterminal_angle(:math.pi() - angle)
+  end
+
+  @doc """
+  Returns the minimal positive coterminal angle for the given angle.
+
+  No matter the angle provided, the returned angle will be in the range [0, 2π)
+
+
+  ## Examples
+      iex> Distance.min_positive_coterminal_angle(:math.pi() / 2.0)
+      :math.pi() / 2
+      iex> Distance.min_positive_coterminal_angle(-2.0 + :math.pi() * 6)
+      :math.pi() * 2.0 - 2.0
+      iex> Distance.min_positive_coterminal_angle(-:math.pi())
+      :math.pi()
+  """
+  @spec min_positive_coterminal_angle(number()) :: float()
+  def min_positive_coterminal_angle(angle) do
+    :math.fmod(angle, :math.pi() * 2)
+    |> case do
+      a when a < 0.0 -> a + :math.pi() * 2
+      a -> a
+    end
+  end
+
+  @doc """
+  Returns the angular difference between two directions in the range 
+  """
+  @spec angular_difference(number(), number()) :: float()
+  def angular_difference(a1, a2) do
+    min_coterminal_angle(a2 - a1)
   end
 end

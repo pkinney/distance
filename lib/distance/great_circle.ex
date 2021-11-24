@@ -10,6 +10,8 @@ defmodule Distance.GreatCircle do
   returns the distance in meters. It will also accept a List of tuples.
   """
 
+  @type coords() :: {number(), number()}
+
   @pi_over_180 3.14159265359 / 180.0
   @radius_of_earth_meters 6_371_008.8
 
@@ -23,6 +25,8 @@ defmodule Distance.GreatCircle do
       iex> Distance.GreatCircle.distance({-74.00597, 40.71427}, {-70.56656, -33.42628})
       8251609.780265334
   """
+
+  @spec distance(coords(), coords()) :: float()
   def distance({lon1, lat1}, {lon2, lat2}) do
     a = :math.sin((lat2 - lat1) * @pi_over_180 / 2)
     b = :math.sin((lon2 - lon1) * @pi_over_180 / 2)
@@ -45,8 +49,9 @@ defmodule Distance.GreatCircle do
       ...>  {-97.635926, 30.134442}])
       44728827.84910666
   """
-  def distance([]), do: 0
-  def distance([_]), do: 0
+  @spec distance(list(coords())) :: float()
+  def distance([]), do: 0.0
+  def distance([_]), do: 0.0
 
   def distance([p1, p2 | tail]) do
     distance(p1, p2) + distance([p2 | tail])

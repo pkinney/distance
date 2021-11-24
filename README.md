@@ -1,6 +1,6 @@
 # Distance
 
-[![Build Status](https://travis-ci.org/pkinney/distance.svg?branch=master)](https://travis-ci.org/pkinney/distance)
+[![CI](https://github.com/pkinney/distance/actions/workflows/ci.yaml/badge.svg)](https://github.com/pkinney/distance/actions/workflows/ci.yaml)
 [![Hex.pm](https://img.shields.io/hexpm/v/distance.svg)](https://hex.pm/packages/distance)
 
 Provides a set of distance functions for use in GIS or graphic applications.
@@ -9,7 +9,7 @@ Provides a set of distance functions for use in GIS or graphic applications.
 
 ```elixir
 defp deps do
-  [{:distance, "~> 0.2.1"}]
+  [{:distance, "~> 1.0"}]
 end
 ```
 
@@ -51,6 +51,17 @@ calculations when needed:
 ```elixir
 Distance.segment_distance_squared({3, 2}, {-2, 1}, {5, 3}) # => 0.170...
 ```
+
+### Angular Functions
+
+Get bearing from one point to another and project from one point a given
+distance along a direction.  Additionally, there are useful methods for 
+simplifying angles to coterminal angles and measuring differences between
+directions.
+
+Angles are measured as radians off of the positive x-axis in the direction of
+the positive y-axis.
+
 
 ### Great Circle Distance
 

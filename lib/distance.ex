@@ -159,7 +159,7 @@ defmodule Distance do
   Returns a point `distance` units away in the direction `direction`.
 
   The direction is measured as radians off of the positive x-axis in the direction of
-  the positinve y-axis.  Thus the new coordinates are:
+  the positive y-axis.  Thus the new coordinates are:
 
   ```elixir
   x1 = x0 + distance * cos(direction)

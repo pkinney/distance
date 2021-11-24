@@ -4,7 +4,7 @@ defmodule Distance.Mixfile do
   def project() do
     [
       app: :distance,
-      version: "1.0.0",
+      version: "1.0.1",
       elixir: "~> 1.4",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
@@ -24,7 +24,7 @@ defmodule Distance.Mixfile do
     [
       {:seg_seg, "~> 0.1"},
       {:earmark, "~> 1.1", only: :dev},
-      {:ex_doc, "~> 0.15", only: :dev},
+      {:ex_doc, "~> 0.24", only: :dev, runtime: false},
       {:benchfella, "~> 0.3.4", only: :dev},
       {:excoveralls, "~> 0.6", only: :test},
       {:stream_data, "~> 0.5", only: :test},

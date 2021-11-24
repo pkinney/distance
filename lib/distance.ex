@@ -57,6 +57,41 @@ defmodule Distance do
   end
 
   @doc """
+  Returns the geometric distance from a point `p` and the infinite line
+  extending through points `p1` and `p2`. 
+
+  ## Examples
+      iex> Distance.line_distance({3, 2}, {-2, 1}, {5, 3})
+      0.4120816918460673 # distance between the point {3, 2} and the closest point along line segment ({-2, 1}, {5, 3})
+      iex> Distance.line_distance({1, -2}, {-2, 2}, {-10, 102})
+      2.671464946476815
+      iex> Distance.line_distance({1, -2}, {-2, 2}, {1, -2})
+      0.0
+  """
+  @spec line_distance(point, point, point) :: float()
+  def line_distance(p, p1, p2), do: :math.sqrt(line_distance_squared(p, p1, p2))
+
+  @doc """
+  Similar to `Distance.distance_squared`, this provides much faster comparable
+  version of `Distance.line_distance`.
+
+  ## Examples
+      iex> Distance.line_distance_squared({3, 2}, {-2, 1}, {5, 3})
+      0.16981132075471717
+      iex> Distance.line_distance_squared({1, -2}, {-2, 2}, {-10, 102})
+      7.136724960254371
+  """
+  @spec line_distance_squared(point, point, point) :: float()
+  def line_distance_squared(_, {x1, y1}, {x2, y2}) when x1 == x2 and y1 == y2, do: 0.0
+
+  def line_distance_squared({x, y}, {x1, y1}, {x2, y2}) do
+    dx = x2 - x1
+    dy = y2 - y1
+    t = ((x - x1) * dx + (y - y1) * dy) / (dx * dx + dy * dy)
+    distance_squared({x, y}, {x1 + dx * t, y1 + dy * t})
+  end
+
+  @doc """
   Returns the geometric distance from a point `p` and the line segment
   between two points `p1` and `p2`.  Note that this is a line segment, not
   an infinite line, so points not between `p1` and `p2` will return the
@@ -90,7 +125,6 @@ defmodule Distance do
   def segment_distance_squared({x, y}, {x1, y1}, {x2, y2}) do
     dx = x2 - x1
     dy = y2 - y1
-
     t = ((x - x1) * dx + (y - y1) * dy) / (dx * dx + dy * dy)
 
     cond do

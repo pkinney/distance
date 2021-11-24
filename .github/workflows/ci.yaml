@@ -27,11 +27,8 @@ jobs:
           restore-keys: |
             plt-cache-
 
-      - name: Install dependencies
-        run: mix deps.get
-
-      - name: Run "mix format"
-        run: mix validate
+      - name: Validate
+        run: mix do deps.get, validate
 
   test:
     name: Test (Elixir ${{matrix.elixir}} | Erlang/OTP ${{matrix.otp}})

@@ -20,7 +20,7 @@ defmodule VincentyDistanceTest do
                       {126.967583, 37.566776},
                       {151.215158, -33.857406}
                     ),
-                    82_96_608,
+                    8_296_608,
                     1
 
     assert_in_delta Vincenty.distance(

@@ -87,6 +87,32 @@ Distance.GreatCircle.distance([
 ]) # => 44728827.849...
 ```
 
+
+### Vincenty's Inverse Formula Distance
+
+Calculate distance per [Vincenty's inverse formula](https://en.wikipedia.org/wiki/Vincenty%27s_formulae)
+(shortest travel distance on the surface of an [oblate spheroid](https://en.wikipedia.org/wiki/Spheroid#Oblate_spheroids) Earth) given two longitude-latitude pairs.
+
+This method is iterative and more costly than other methods, such as the [great circle](lib/distance/great_circle.ex) method, but also potentially more accurate. 
+It is important to note that [nearly antipodal points](https://en.wikipedia.org/wiki/Vincenty%27s_formulae#Nearly_antipodal_points) can cause convergence issues with this method.
+
+The function accepts two tuples in the form of `{longitude, latitude}` and
+returns the distance in meters. It will also accept a List of tuples.
+
+```elixir
+Distance.Vincenty.distance({-96.796667, 32.775833}, {126.967583, 37.566776}) # => 10997423.55...
+
+Distance.Vincenty.distance([
+  {-96.796667, 32.775833},
+  {126.967583, 37.566776},
+  {151.215158, -33.857406},
+  {55.274180, 25.197229},
+  {6.942661, 50.334057},
+  {-97.635926, 30.134442}
+]) # => 44737835.514...
+```
+
+
 # Contributing
 
 In order to run all of the checks locally, use the `validate` mix task:

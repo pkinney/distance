@@ -87,6 +87,7 @@ Distance.GreatCircle.distance([
 ]) # => 44728827.849...
 ```
 
+
 ### Vincenty's Inverse Formula Distance
 
 Calculate distance per [Vincenty's inverse formula](https://en.wikipedia.org/wiki/Vincenty%27s_formulae)
@@ -109,4 +110,14 @@ Distance.Vincenty.distance([
   {6.942661, 50.334057},
   {-97.635926, 30.134442}
 ]) # => 44737835.514...
+```
+
+
+# Contributing
+
+In order to run all of the checks locally, use the `validate` mix task:
+
+```bash
+mix validate
+mix test
 ```

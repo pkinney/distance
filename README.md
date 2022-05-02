@@ -86,3 +86,12 @@ Distance.GreatCircle.distance([
   {-97.635926, 30.134442}
 ]) # => 44728827.849...
 ```
+
+# Contributing
+
+In order to run all of the checks locally, use the `validate` mix task:
+
+```bash
+mix validate
+mix test
+```

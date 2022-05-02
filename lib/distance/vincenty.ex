@@ -26,8 +26,8 @@ defmodule Distance.Vincenty do
   ## Examples
       iex> Distance.Vincenty.distance({-105.343, 39.984}, {-105.534, 39.123})
       96992.65430928342
-      iex> Distance.Vincenty.distance({-74.00597, 40.71427}, {-70.56656, -33.42628})
-      8216469.550643708
+      iex> Distance.Vincenty.distance({-74.00597, 40.71429}, {-70.56656, -33.42629})
+      8216472.876442492
   """
 
   @spec distance(coords(), coords()) :: float()

@@ -135,8 +135,7 @@ defmodule Distance.Vincenty do
   defp calculate_cos_squared_alpha(sin_alpha), do: 1 - :math.pow(sin_alpha, 2)
 
   @spec calculate_cos2_sigma_m(number(), number(), number(), number()) :: number()
-  defp calculate_cos2_sigma_m(_, _, _, +0.0), do: 0
-  defp calculate_cos2_sigma_m(_, _, _, -0.0), do: 0
+  defp calculate_cos2_sigma_m(_, _, _, cos_squared_alpha) when cos_squared_alpha == 0.0, do: 0
 
   defp calculate_cos2_sigma_m(sin_u1, sin_u2, cos_sigma, cos_squared_alpha) do
     cos_sigma - 2 * sin_u1 * sin_u2 / cos_squared_alpha

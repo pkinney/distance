@@ -12,7 +12,15 @@ defmodule Distance.Mixfile do
       package: package(),
       dialyzer: [plt_add_apps: [:mix, :seg_seg]],
       deps: deps(),
-      aliases: aliases()
+      aliases: aliases(),
+
+      # Docs
+      name: "Distance",
+      docs: [
+        main: "Distance",
+        source_url: "https://github.com/pkinney/distance",
+        source_ref: "master"
+      ]
     ]
   end
 
